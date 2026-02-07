@@ -7,828 +7,463 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="CM Trip" />
   <meta name="theme-color" content="#0F1419" />
-  <meta name="description" content="Chiang Mai Travel Companion - Your complete trip organizer" />
   <title>Chiang Mai Trip Companion</title>
 
-  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNoaWFuZyBNYWkgVHJpcCBDb21wYW5pb24iLAogICJzaG9ydF9uYW1lIjogIkNNIFRyaXAiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBGMTQxOSIsCiAgInRoZW1lX2NvbG9yIjogIiMwRjE0MTkiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCw8c3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHZpZXdCb3g9JzAgMCA1MTIgNTEyJz48cmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgZmlsbD0nJTIzMEYxNDE5Jy8+PHRleHQgeD0nMjU2JyB5PScyODAnIGZvbnQtc2l6ZT0nMjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNENEFGMzcnPuKbqTwvdGV4dD48L3N2Zz4iLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230F1419'/><text x='90' y='105' font-size='80' text-anchor='middle' fill='%23D4AF37'>⛩</text></svg>" />
-
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ2hpYW5nIE1haSBUcmlwIiwic2hvcnRfbmFtZSI6IkNNIFRyaXAiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBGMTQxOSIsInRoZW1lX2NvbG9yIjoiIzBGMTQxOSJ9" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { 
-      background: #0F1419; color: #fff; font-family: 'DM Sans', sans-serif;
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      overscroll-behavior: none; overflow-x: hidden; min-height: 100vh;
-      -webkit-tap-highlight-color: transparent;
-    }
-    ::-webkit-scrollbar { width: 0; height: 0; }
-    input::placeholder, select { color: rgba(255,255,255,0.3); }
-    input:focus, select:focus { outline: none; border-color: rgba(212,175,55,0.5) !important; }
-    select option { background: #1A1F2E; color: #fff; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:#0F1419;color:#fff;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;overflow-x:hidden;min-height:100vh;-webkit-tap-highlight-color:transparent}
+    ::-webkit-scrollbar{width:0;height:0}
+    input::placeholder,select{color:rgba(255,255,255,0.3)}
+    input:focus,select:focus{outline:none;border-color:rgba(212,175,55,0.5)!important}
+    select option{background:#1A1F2E;color:#fff}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
 
-    .app-root { max-width: 480px; margin: 0 auto; min-height: 100vh; position: relative; }
-    .animated-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-    .animated-bg::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(165deg, #0F1419 0%, #1A1F2E 30%, #1E2636 50%, #1A2332 70%, #0F1419 100%);
-    }
-    .animated-bg .orb1 {
-      position: absolute; top: -20%; right: -15%; width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); filter: blur(60px);
-    }
-    .animated-bg .orb2 {
-      position: absolute; bottom: -10%; left: -10%; width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(239,68,68,0.05) 0%, transparent 70%); filter: blur(50px);
-    }
+    .app-root{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
+    .bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+    .bg::before{content:'';position:absolute;inset:0;background:linear-gradient(165deg,#0F1419 0%,#1A1F2E 30%,#1E2636 50%,#1A2332 70%,#0F1419 100%)}
+    .bg .o1{position:absolute;top:-20%;right:-15%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.08)0%,transparent 70%);filter:blur(60px)}
+    .bg .o2{position:absolute;bottom:-10%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.05)0%,transparent 70%);filter:blur(50px)}
 
-    .glass {
-      background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
-    }
-    .glass-active { border-color: rgba(212,175,55,0.3) !important; }
+    .g{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:16px}
+    .g-a{border-color:rgba(212,175,55,0.3)!important}
 
-    .input {
-      width: 100%; padding: 10px 14px; border-radius: 10px; font-size: 13px;
-      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
-      color: #fff; font-family: 'DM Sans', sans-serif;
-    }
-    .btn-gold {
-      padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
-      border: none; background: linear-gradient(135deg, #D4AF37, #F5E6A3); color: #1A1F2E;
-      font-family: 'DM Sans', sans-serif; -webkit-appearance: none;
-    }
-    .btn-purple {
-      padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
-      border: none; background: linear-gradient(135deg, #A78BFA, #C4B5FD); color: #1A1F2E;
-      font-family: 'DM Sans', sans-serif; -webkit-appearance: none;
-    }
-    .btn-ghost {
-      padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.6);
-      font-family: 'DM Sans', sans-serif; -webkit-appearance: none;
-    }
-    .btn-gold:active, .btn-purple:active { transform: scale(0.97); }
+    .inp{width:100%;padding:10px 14px;border-radius:10px;font-size:13px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#fff;font-family:'DM Sans',sans-serif}
+    .bg-gold{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:linear-gradient(135deg,#D4AF37,#F5E6A3);color:#1A1F2E;font-family:'DM Sans',sans-serif;-webkit-appearance:none}
+    .bg-purple{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:linear-gradient(135deg,#A78BFA,#C4B5FD);color:#1A1F2E;font-family:'DM Sans',sans-serif;-webkit-appearance:none}
+    .bg-ghost{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;-webkit-appearance:none}
+    .bg-gold:active,.bg-purple:active{transform:scale(0.97)}
 
-    .bottom-nav {
-      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 480px; z-index: 10;
-      background: rgba(15,20,25,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-      display: flex; justify-content: space-around;
-    }
-    .nav-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-      background: none; border: none; cursor: pointer; padding: 6px 12px;
-      color: rgba(255,255,255,0.35); transition: all 0.2s; -webkit-appearance: none;
-    }
-    .nav-btn.active { color: #D4AF37; }
-    .nav-btn .icon { font-size: 20px; }
-    .nav-btn.active .icon { filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)); }
-    .nav-btn .label { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
-    .nav-dot { width: 4px; height: 4px; border-radius: 50%; background: #D4AF37; margin-top: 1px; }
+    .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:10;background:rgba(15,20,25,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.06);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:space-around}
+    .nb{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 12px;color:rgba(255,255,255,0.35);transition:all 0.2s;-webkit-appearance:none}
+    .nb.on{color:#D4AF37}
+    .nb .ic{font-size:20px}
+    .nb.on .ic{filter:drop-shadow(0 0 6px rgba(212,175,55,0.4))}
+    .nb .lb{font-size:10px;font-weight:600;letter-spacing:0.5px}
+    .nd{width:4px;height:4px;border-radius:50%;background:#D4AF37;margin-top:1px}
 
-    .page { padding: 0 20px 100px; animation: fadeUp 0.4s ease; }
-    .page-header { padding: 20px 0 16px; }
-    .page-title { font-family: 'Playfair Display', serif; font-size: 26px; color: #fff; }
-    .page-subtitle { color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 4px; }
+    .pg{padding:0 20px 100px;animation:fadeUp 0.4s ease}
+    .tag{padding:8px 14px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);transition:all 0.2s;font-family:'DM Sans',sans-serif;-webkit-appearance:none}
+    .tag.tg{border-color:#D4AF37;background:rgba(212,175,55,0.15);color:#D4AF37}
+    .tag.tp{border-color:#A78BFA;background:rgba(167,139,250,0.15);color:#A78BFA}
 
-    .type-badge { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; flex-shrink: 0; }
-    .spot-card { transition: all 0.3s; cursor: pointer; }
-    .spot-card.done { opacity: 0.45; }
+    .rbtn{background:rgba(239,68,68,0.1);border:none;color:#EF4444;cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:14px;-webkit-appearance:none}
+    .vbtn{background:rgba(91,141,239,0.1);border:none;color:#5B8DEF;cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:14px;-webkit-appearance:none}
 
-    .icon-box { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-    .icon-box-lg { width: 48px; height: 48px; font-size: 24px; }
-    .avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; }
+    .tl{padding:8px 0 0 12px;border-left:2px solid rgba(212,175,55,0.15);margin-left:20px}
+    .td{position:absolute;left:-7px;top:18px;width:12px;height:12px;border-radius:50%;border:2px solid #1A1F2E;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff}
 
-    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .vo{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;animation:fadeUp 0.2s ease}
+    .vh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;padding-top:calc(16px + env(safe-area-inset-top));background:rgba(15,20,25,0.9);backdrop-filter:blur(10px)}
+    .vb{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:10px}
+    .vb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+    .vb iframe{width:100%;height:100%;border:none;border-radius:8px;background:#fff}
 
-    .tag-btn {
-      padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
-      color: rgba(255,255,255,0.5); transition: all 0.2s; font-family: 'DM Sans', sans-serif; -webkit-appearance: none;
-    }
-    .tag-btn.gold-active { border-color: #D4AF37; background: rgba(212,175,55,0.15); color: #D4AF37; }
-    .tag-btn.purple-active { border-color: #A78BFA; background: rgba(167,139,250,0.15); color: #A78BFA; }
+    .toast{position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:200;background:rgba(16,185,129,0.9);color:#fff;padding:12px 24px;border-radius:12px;font-size:13px;font-weight:600;animation:fadeUp 0.3s ease;pointer-events:none}
+    .toast.err{background:rgba(239,68,68,0.9)}
 
-    .remove-btn { background: rgba(239,68,68,0.1); border: none; color: #EF4444; cursor: pointer; width: 28px; height: 28px; border-radius: 8px; font-size: 14px; flex-shrink: 0; -webkit-appearance: none; }
-    .view-btn { background: rgba(91,141,239,0.1); border: none; color: #5B8DEF; cursor: pointer; width: 32px; height: 32px; border-radius: 8px; font-size: 14px; -webkit-appearance: none; }
-    .remove-btn-sm { background: rgba(239,68,68,0.1); border: none; color: #EF4444; cursor: pointer; width: 32px; height: 32px; border-radius: 8px; font-size: 14px; -webkit-appearance: none; }
+    .us{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px}
+    .us.upl{background:rgba(212,175,55,0.1);color:#D4AF37}
+    .us.ok{background:rgba(16,185,129,0.1);color:#10B981}
+    .us.fail{background:rgba(239,68,68,0.1);color:#EF4444}
+    .sp{width:14px;height:14px;border:2px solid rgba(212,175,55,0.3);border-top-color:#D4AF37;border-radius:50%;animation:spin 0.6s linear infinite}
 
-    .timeline { padding: 8px 0 0 12px; border-left: 2px solid rgba(212,175,55,0.15); margin-left: 20px; }
-    .timeline-dot { position: absolute; left: -7px; top: 18px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #1A1F2E; display: flex; align-items: center; justify-content: center; font-size: 7px; color: #fff; }
+    .sb{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px;font-size:11px;color:rgba(255,255,255,0.4)}
+    .sd{width:6px;height:6px;border-radius:50%}
+    .sd.on{background:#10B981}.sd.sync{background:#F59E0B;animation:pulse 1s infinite}.sd.off{background:#EF4444}
 
-    .gold-text { color: #D4AF37; }
-    .section-line { width: 20px; height: 1px; background: linear-gradient(90deg, #D4AF37, transparent); display: inline-block; }
+    .setup{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;z-index:1}
+    .ci{font-size:28px;text-align:center;letter-spacing:8px;font-weight:700;font-family:'Playfair Display',serif;text-transform:uppercase}
+    .ordiv{display:flex;align-items:center;gap:16px;margin:20px 0;color:rgba(255,255,255,0.3);font-size:12px}
+    .ordiv::before,.ordiv::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.1)}
 
-    /* Full screen viewer overlay */
-    .viewer-overlay {
-      position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95);
-      display: flex; flex-direction: column; animation: fadeUp 0.2s ease;
-    }
-    .viewer-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 20px; padding-top: calc(16px + env(safe-area-inset-top));
-      background: rgba(15,20,25,0.9); backdrop-filter: blur(10px);
-    }
-    .viewer-body { flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 10px; }
-    .viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
-    .viewer-body iframe { width: 100%; height: 100%; border: none; border-radius: 8px; background: #fff; }
-    .viewer-body embed { width: 100%; height: 100%; border: none; border-radius: 8px; }
-
-    /* Toast notification */
-    .toast {
-      position: fixed; top: 60px; left: 50%; transform: translateX(-50%); z-index: 200;
-      background: rgba(16,185,129,0.9); color: #fff; padding: 12px 24px; border-radius: 12px;
-      font-size: 13px; font-weight: 600; backdrop-filter: blur(10px);
-      animation: fadeUp 0.3s ease; pointer-events: none;
-    }
-    .toast.error { background: rgba(239,68,68,0.9); }
-
-    /* Upload progress */
-    .upload-status {
-      margin-top: 10px; padding: 10px 14px; border-radius: 10px;
-      background: rgba(212,175,55,0.1); font-size: 12px; color: #D4AF37;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .upload-status.success { background: rgba(16,185,129,0.1); color: #10B981; }
-    .upload-status.error { background: rgba(239,68,68,0.1); color: #EF4444; }
-    .spinner { width: 14px; height: 14px; border: 2px solid rgba(212,175,55,0.3); border-top-color: #D4AF37; border-radius: 50%; animation: spin 0.6s linear infinite; }
+    .cb{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin:16px 0}
+    .cb h3{color:#EF4444;font-size:14px;margin-bottom:8px}
+    .cb p{color:rgba(255,255,255,0.5);font-size:12px;line-height:1.7}
+    .cb code{background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;font-size:11px;color:#F5E6A3}
   </style>
 </head>
 <body>
-
-<div class="animated-bg"><div class="orb1"></div><div class="orb2"></div></div>
-<div class="app-root" id="app"></div>
+<div class="bg"><div class="o1"></div><div class="o2"></div></div>
+<div class="app-root" id="app"><div class="setup"><div style="color:rgba(255,255,255,0.3)">Loading...</div></div></div>
 <div id="viewer"></div>
 <div id="toast"></div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
 <script>
-// ═══════════════════════════════════════════════
-// IndexedDB File Storage (supports large files)
-// ═══════════════════════════════════════════════
-const DB_NAME = 'CMTripDB';
-const DB_VERSION = 1;
-let db = null;
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = (e) => {
-      const d = e.target.result;
-      if (!d.objectStoreNames.contains('files')) d.createObjectStore('files', { keyPath: 'id' });
-    };
-    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
-    req.onerror = (e) => reject(e);
-  });
-}
-
-function saveFile(id, blob, meta) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readwrite');
-    tx.objectStore('files').put({ id, blob, meta });
-    tx.oncomplete = () => resolve();
-    tx.onerror = (e) => reject(e);
-  });
-}
-
-function getFile(id) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readonly');
-    const req = tx.objectStore('files').get(id);
-    req.onsuccess = () => resolve(req.result || null);
-    req.onerror = (e) => reject(e);
-  });
-}
-
-function deleteFile(id) {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readwrite');
-    tx.objectStore('files').delete(id);
-    tx.oncomplete = () => resolve();
-    tx.onerror = (e) => reject(e);
-  });
-}
-
-function getAllFileKeys() {
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readonly');
-    const req = tx.objectStore('files').getAllKeys();
-    req.onsuccess = () => resolve(req.result || []);
-    req.onerror = (e) => reject(e);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// Toast Notifications
-// ═══════════════════════════════════════════════
-function showToast(msg, type = 'success') {
-  const el = document.getElementById('toast');
-  el.innerHTML = `<div class="toast ${type}">${msg}</div>`;
-  setTimeout(() => { el.innerHTML = ''; }, 2500);
-}
-
-// ═══════════════════════════════════════════════
-// Full Screen File Viewer
-// ═══════════════════════════════════════════════
-async function openViewer(fileId, title) {
-  const record = await getFile(fileId);
-  if (!record || !record.blob) {
-    showToast('File not found', 'error');
-    return;
-  }
-
-  const blob = record.blob;
-  const url = URL.createObjectURL(blob);
-  const isImage = blob.type.startsWith('image/');
-  const isPDF = blob.type === 'application/pdf';
-
-  const el = document.getElementById('viewer');
-  el.innerHTML = `
-    <div class="viewer-overlay">
-      <div class="viewer-header">
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff">${title || 'Document'}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px">${isImage ? '📷 Image' : '📄 PDF'} · ${formatBytes(blob.size)}</div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn-ghost" style="padding:8px 14px;font-size:12px" onclick="downloadFile('${fileId}','${(title||'document').replace(/'/g,'')}')" title="Download">⬇️ Save</button>
-          <button class="btn-ghost" style="padding:8px 14px;font-size:12px" onclick="closeViewer()" title="Close">✕ Close</button>
-        </div>
-      </div>
-      <div class="viewer-body">
-        ${isImage ? `<img src="${url}" alt="${title}" />` : ''}
-        ${isPDF ? `<iframe src="${url}#toolbar=1" title="${title}"></iframe>` : ''}
-        ${!isImage && !isPDF ? `<div style="text-align:center;color:rgba(255,255,255,0.5)">
-          <div style="font-size:48px;margin-bottom:12px">📎</div>
-          <div>Preview not available for this file type</div>
-          <button class="btn-gold" style="margin-top:16px" onclick="downloadFile('${fileId}','${(title||'file').replace(/'/g,'')}')">⬇️ Download File</button>
-        </div>` : ''}
-      </div>
-    </div>`;
-}
-
-function closeViewer() {
-  document.getElementById('viewer').innerHTML = '';
-}
-
-async function downloadFile(fileId, name) {
-  const record = await getFile(fileId);
-  if (!record || !record.blob) return;
-  const url = URL.createObjectURL(record.blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = name || 'download';
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('File saved!');
-}
-
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
-  return (bytes/1048576).toFixed(1) + ' MB';
-}
-
-// ═══════════════════════════════════════════════
-// State Management
-// ═══════════════════════════════════════════════
-function loadState(key, fallback) {
-  try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : fallback; } catch { return fallback; }
-}
-function saveState(key, val) {
-  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
-}
-
-const STATE = {
-  tab: 'dashboard',
-  itinerary: loadState('cm_itin2', getDefaultItinerary()),
-  // documents & tickets metadata stored in localStorage, actual files in IndexedDB
-  documents: loadState('cm_docs2', []),
-  tickets: loadState('cm_tickets2', []),
-  travelers: loadState('cm_travelers2', [
-    { id:1, name:'', relation:'Self', passport:'', aadhaar:'', dob:'', phone:'', email:'', blood:'', allergies:'', emergency:'' },
-    { id:2, name:'', relation:'Wife', passport:'', aadhaar:'', dob:'', phone:'', email:'', blood:'', allergies:'', emergency:'' },
-  ]),
-  ui: { expandedDay: 1, addingTo: null, editingTraveler: null }
+// ════════════════════════════════════════════════
+// 🔥 FIREBASE CONFIG - PASTE YOUR VALUES HERE
+// ════════════════════════════════════════════════
+const FB = {
+  apiKey: "AIzaSyAypx405nhz5w-71fOxjCg0j9GKseSwhRo",
+  authDomain: "chiangmai-27e9b.firebaseapp.com",
+  projectId: "chiangmai-27e9b",
+  storageBucket: "chiangmai-27e9b.firebasestorage.app",
+  messagingSenderId: "333507033643",
+  appId: "1:333507033643:web:7d63bb36d2ff270fa1486e"
 };
 
-function getDefaultItinerary() {
-  return [
-    { id:1, day:"Day 1", date:"Arrival Day", spots:[
-      { id:1, name:"Chiang Mai International Airport", time:"10:00 AM", type:"transport", done:false, notes:"Collect luggage, get SIM card at airport" },
-      { id:2, name:"Check-in at Hotel", time:"12:00 PM", type:"hotel", done:false, notes:"Early check-in requested" },
-      { id:3, name:"Kad Manee Market", time:"3:00 PM", type:"food", done:false, notes:"Try Khao Soi and mango sticky rice" },
-      { id:4, name:"Tha Phae Gate Evening Walk", time:"6:00 PM", type:"attraction", done:false, notes:"Beautiful at sunset, street performers" },
-    ]},
-    { id:2, day:"Day 2", date:"Temples & Culture", spots:[
-      { id:5, name:"Doi Suthep Temple", time:"7:00 AM", type:"attraction", done:false, notes:"Go early to avoid crowds. 306 steps!" },
-      { id:6, name:"Wat Chedi Luang", time:"11:00 AM", type:"attraction", done:false, notes:"Ancient ruins, monk chat available" },
-      { id:7, name:"SP Chicken for Lunch", time:"1:00 PM", type:"food", done:false, notes:"Famous roast chicken, cash only" },
-      { id:8, name:"Wat Phra Singh", time:"3:00 PM", type:"attraction", done:false, notes:"Most revered temple in Chiang Mai" },
-      { id:9, name:"Night Bazaar", time:"7:00 PM", type:"shopping", done:false, notes:"Bargain! Start at 50% of asking price" },
-    ]},
-    { id:3, day:"Day 3", date:"Nature & Adventure", spots:[
-      { id:10, name:"Elephant Nature Park", time:"8:00 AM", type:"attraction", done:false, notes:"Full day tour, ethical sanctuary" },
-      { id:11, name:"Lunch at the Park", time:"12:00 PM", type:"food", done:false, notes:"Buffet included in tour" },
-      { id:12, name:"Return & Rest", time:"4:00 PM", type:"hotel", done:false, notes:"Freshen up at hotel" },
-      { id:13, name:"Riverside Dinner", time:"7:00 PM", type:"food", done:false, notes:"The Riverside Bar & Restaurant" },
-    ]},
-    { id:4, day:"Day 4", date:"Markets & Cooking", spots:[
-      { id:14, name:"Warorot Market", time:"8:00 AM", type:"shopping", done:false, notes:"Local market, buy spices & dried fruits" },
-      { id:15, name:"Thai Cooking Class", time:"10:00 AM", type:"attraction", done:false, notes:"Mama Noi Cooking School - booked!" },
-      { id:16, name:"Nimman Road Cafés", time:"3:00 PM", type:"food", done:false, notes:"Ristr8to for award-winning latte art" },
-      { id:17, name:"MAYA Lifestyle Mall", time:"5:00 PM", type:"shopping", done:false, notes:"Rooftop bar at sunset" },
-    ]},
-    { id:5, day:"Day 5", date:"Departure", spots:[
-      { id:18, name:"Hotel Checkout", time:"9:00 AM", type:"hotel", done:false, notes:"Pack souvenirs carefully" },
-      { id:19, name:"Khao Soi Khun Yai", time:"10:30 AM", type:"food", done:false, notes:"Best Khao Soi in town, don't miss!" },
-      { id:20, name:"Airport Transfer", time:"1:00 PM", type:"transport", done:false, notes:"Grab taxi or hotel shuttle" },
-    ]},
-  ];
+let fbOk=false, db, storage, ss='off', tripCode=localStorage.getItem('cm_tc')||'', unsubs=[];
+const ok=()=>FB.apiKey&&FB.apiKey!=='YOUR_API_KEY';
+
+async function initFB(){
+  if(!ok())return false;
+  try{
+    firebase.initializeApp(FB);
+    await firebase.auth().signInAnonymously();
+    db=firebase.firestore();
+    storage=firebase.storage();
+    await db.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+    fbOk=true; ss='on';
+    return true;
+  }catch(e){console.error(e);return false}
 }
 
-const TYPE_ICONS = { transport:"🚗", hotel:"🏨", food:"🍜", attraction:"⛩️", shopping:"🛍️" };
-const TYPE_COLORS = { transport:"#5B8DEF", hotel:"#A78BFA", food:"#F59E0B", attraction:"#EF4444", shopping:"#10B981" };
+const tRef=c=>db.collection('trips').doc(tripCode).collection(c);
+const tDoc=()=>db.collection('trips').doc(tripCode);
 
-// ═══════════════════════════════════════════════
-// Rendering
-// ═══════════════════════════════════════════════
-function render() {
-  const app = document.getElementById('app');
-  let html = '<div style="position:relative;z-index:1">';
-  switch(STATE.tab) {
-    case 'dashboard': html += renderDashboard(); break;
-    case 'itinerary': html += renderItinerary(); break;
-    case 'documents': html += renderDocuments(); break;
-    case 'tickets': html += renderTickets(); break;
-    case 'travelers': html += renderTravelers(); break;
-  }
-  html += '</div>' + renderNav();
-  app.innerHTML = html;
+function genCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let r='';for(let i=0;i<6;i++)r+=c[Math.floor(Math.random()*c.length)];return r}
+
+async function cloudSave(col,id,data){if(!fbOk||!tripCode)return;ss='sync';rsb();try{await tRef(col).doc(String(id)).set(data,{merge:true});ss='on';rsb()}catch(e){ss='on';rsb()}}
+async function cloudDel(col,id){if(!fbOk||!tripCode)return;try{await tRef(col).doc(String(id)).delete()}catch(e){}}
+async function cloudUpload(path,file){if(!fbOk||!tripCode)return '';const r=storage.ref(`trips/${tripCode}/${path}`);const s=await r.put(file);return await s.ref.getDownloadURL()}
+async function cloudDelFile(path){if(!fbOk||!tripCode)return;try{await storage.ref(`trips/${tripCode}/${path}`).delete()}catch(e){}}
+
+function listen(){
+  unsubs.forEach(f=>f());unsubs=[];
+  if(!fbOk||!tripCode)return;
+
+  unsubs.push(tRef('itinerary').onSnapshot(snap=>{
+    const d=[];snap.forEach(doc=>d.push({_id:doc.id,...doc.data()}));
+    if(d.length>0){S.itin=d.map(x=>({id:Number(x._id),day:x.day,date:x.date,spots:x.spots||[]})).sort((a,b)=>a.id-b.id);if(S.tab==='dashboard'||S.tab==='itinerary')render()}
+  }));
+
+  unsubs.push(tRef('documents').onSnapshot(snap=>{
+    const d=[];snap.forEach(doc=>d.push({...doc.data(),id:doc.id}));
+    S.docs=d;if(S.tab==='documents'||S.tab==='dashboard')render()
+  }));
+
+  unsubs.push(tRef('tickets').onSnapshot(snap=>{
+    const d=[];snap.forEach(doc=>d.push({...doc.data(),id:doc.id}));
+    S.tix=d;if(S.tab==='tickets'||S.tab==='dashboard')render()
+  }));
+
+  unsubs.push(tRef('travelers').onSnapshot(snap=>{
+    const d=[];snap.forEach(doc=>d.push({...doc.data(),id:Number(doc.id)}));
+    if(d.length>0){S.tvl=d.sort((a,b)=>a.id-b.id);if(S.tab==='travelers')render()}
+  }));
 }
 
-function renderNav() {
-  const tabs = [
-    { id:'dashboard', icon:'🏠', label:'Home' },
-    { id:'itinerary', icon:'🗓️', label:'Itinerary' },
-    { id:'documents', icon:'📄', label:'Docs' },
-    { id:'tickets', icon:'✈️', label:'Tickets' },
-    { id:'travelers', icon:'👥', label:'Travelers' },
-  ];
-  return `<div class="bottom-nav">${tabs.map(t => `
-    <button class="nav-btn ${STATE.tab===t.id?'active':''}" onclick="navigate('${t.id}')">
-      <span class="icon">${t.icon}</span><span class="label">${t.label}</span>
-      ${STATE.tab===t.id ? '<div class="nav-dot"></div>' : ''}
-    </button>`).join('')}</div>`;
+async function pushInit(){
+  if(!fbOk||!tripCode)return;
+  await tDoc().set({code:tripCode,created:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+  const b=db.batch();
+  S.itin.forEach(d=>b.set(tRef('itinerary').doc(String(d.id)),{day:d.day,date:d.date,spots:d.spots}));
+  S.tvl.forEach(t=>{const x={...t};delete x._id;b.set(tRef('travelers').doc(String(t.id)),x)});
+  await b.commit();
 }
 
-function navigate(tab) { STATE.tab = tab; render(); window.scrollTo(0,0); }
+// ════════ Toast & Viewer ════════
+function toast(m,t=''){document.getElementById('toast').innerHTML=`<div class="toast ${t}">${m}</div>`;setTimeout(()=>{document.getElementById('toast').innerHTML=''},2500)}
+function fmt(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB'}
 
-// ─── Dashboard ───
-function renderDashboard() {
-  const total = STATE.itinerary.reduce((a,d) => a + d.spots.length, 0);
-  const done = STATE.itinerary.reduce((a,d) => a + d.spots.filter(s=>s.done).length, 0);
-  const pct = total ? Math.round((done/total)*100) : 0;
-  const C = 2 * Math.PI * 54;
-  const offset = C - (pct/100)*C;
-  const todayDay = STATE.itinerary.find(d => d.spots.some(s => !s.done)) || STATE.itinerary[0];
-  const nextSpots = todayDay ? todayDay.spots.filter(s => !s.done).slice(0,3) : [];
+function openV(url,title,ft){
+  if(!url||url==='undefined'){toast('No file URL','err');return}
+  const isImg=ft&&ft.startsWith('image/'),isPdf=ft&&ft.includes('pdf');
+  document.getElementById('viewer').innerHTML=`<div class="vo"><div class="vh">
+    <div><div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff">${title||'Document'}</div></div>
+    <div style="display:flex;gap:8px">
+      <a href="${url}" target="_blank" class="bg-ghost" style="padding:8px 14px;font-size:12px;text-decoration:none">↗ Open</a>
+      <button class="bg-ghost" style="padding:8px 14px;font-size:12px" onclick="closeV()">✕</button>
+    </div></div>
+    <div class="vb">
+      ${isImg?`<img src="${url}" alt="${title}"/>`:''}
+      ${isPdf?`<iframe src="${url}" title="${title}"></iframe>`:''}
+      ${!isImg&&!isPdf?`<div style="text-align:center;color:rgba(255,255,255,0.5)"><div style="font-size:48px;margin-bottom:12px">📎</div><a href="${url}" target="_blank" class="bg-gold">Open File</a></div>`:''}
+    </div></div>`;
+}
+function closeV(){document.getElementById('viewer').innerHTML=''}
 
-  return `<div class="page">
+// ════════ State ════════
+const defItin=()=>[
+  {id:1,day:"Day 1",date:"Arrival",spots:[{id:1,name:"Chiang Mai Airport",time:"10:00 AM",type:"transport",done:false,notes:"Get SIM card"},{id:2,name:"Hotel Check-in",time:"12:00 PM",type:"hotel",done:false,notes:"Early check-in"},{id:3,name:"Kad Manee Market",time:"3:00 PM",type:"food",done:false,notes:"Khao Soi & mango sticky rice"},{id:4,name:"Tha Phae Gate Walk",time:"6:00 PM",type:"attraction",done:false,notes:"Sunset views"}]},
+  {id:2,day:"Day 2",date:"Temples",spots:[{id:5,name:"Doi Suthep Temple",time:"7:00 AM",type:"attraction",done:false,notes:"306 steps, go early"},{id:6,name:"Wat Chedi Luang",time:"11:00 AM",type:"attraction",done:false,notes:"Monk chat available"},{id:7,name:"SP Chicken Lunch",time:"1:00 PM",type:"food",done:false,notes:"Cash only"},{id:8,name:"Wat Phra Singh",time:"3:00 PM",type:"attraction",done:false,notes:"Most revered temple"},{id:9,name:"Night Bazaar",time:"7:00 PM",type:"shopping",done:false,notes:"Bargain at 50%"}]},
+  {id:3,day:"Day 3",date:"Nature",spots:[{id:10,name:"Elephant Nature Park",time:"8:00 AM",type:"attraction",done:false,notes:"Full day ethical tour"},{id:11,name:"Park Lunch",time:"12:00 PM",type:"food",done:false,notes:"Buffet included"},{id:12,name:"Rest at Hotel",time:"4:00 PM",type:"hotel",done:false,notes:"Freshen up"},{id:13,name:"Riverside Dinner",time:"7:00 PM",type:"food",done:false,notes:"The Riverside Bar"}]},
+  {id:4,day:"Day 4",date:"Markets & Cooking",spots:[{id:14,name:"Warorot Market",time:"8:00 AM",type:"shopping",done:false,notes:"Buy spices"},{id:15,name:"Thai Cooking Class",time:"10:00 AM",type:"attraction",done:false,notes:"Mama Noi School"},{id:16,name:"Nimman Road Cafés",time:"3:00 PM",type:"food",done:false,notes:"Ristr8to latte art"},{id:17,name:"MAYA Mall",time:"5:00 PM",type:"shopping",done:false,notes:"Rooftop sunset"}]},
+  {id:5,day:"Day 5",date:"Departure",spots:[{id:18,name:"Hotel Checkout",time:"9:00 AM",type:"hotel",done:false,notes:"Pack souvenirs"},{id:19,name:"Khao Soi Khun Yai",time:"10:30 AM",type:"food",done:false,notes:"Best Khao Soi!"},{id:20,name:"Airport Transfer",time:"1:00 PM",type:"transport",done:false,notes:"Grab or shuttle"}]}
+];
+
+const S={tab:'dashboard',itin:defItin(),docs:[],tix:[],tvl:[
+  {id:1,name:'',relation:'Self',passport:'',aadhaar:'',dob:'',phone:'',email:'',blood:'',allergies:'',emergency:''},
+  {id:2,name:'',relation:'Wife',passport:'',aadhaar:'',dob:'',phone:'',email:'',blood:'',allergies:'',emergency:''}
+],ui:{ed:1,add:null,et:null}};
+
+const TI={transport:"🚗",hotel:"🏨",food:"🍜",attraction:"⛩️",shopping:"🛍️"};
+const TC={transport:"#5B8DEF",hotel:"#A78BFA",food:"#F59E0B",attraction:"#EF4444",shopping:"#10B981"};
+const DT=[{id:'passport',l:'Passport',i:'🛂'},{id:'aadhaar',l:'Aadhaar Card',i:'🪪'},{id:'visa',l:'Visa',i:'📋'},{id:'insurance',l:'Insurance',i:'🛡️'},{id:'other',l:'Other',i:'📄'}];
+const TT=[{id:'flight',l:'Flight',i:'✈️'},{id:'hotel',l:'Hotel',i:'🏨'},{id:'activity',l:'Activity',i:'🎫'},{id:'transport',l:'Transport',i:'🚌'}];
+let sdt='passport',stt='flight';
+
+// ════════ Render ════════
+function render(){
+  const a=document.getElementById('app');
+  if(!tripCode&&ok()){a.innerHTML=rSetup();return}
+  let h='<div style="position:relative;z-index:1">'+rSB();
+  switch(S.tab){case'dashboard':h+=rDash();break;case'itinerary':h+=rItin();break;case'documents':h+=rDocs();break;case'tickets':h+=rTix();break;case'travelers':h+=rTvl();break}
+  h+='</div>'+rNav();a.innerHTML=h;
+}
+
+function nav(t){S.tab=t;render();window.scrollTo(0,0)}
+
+function rSB(){
+  if(!ok())return`<div class="sb" style="color:rgba(239,68,68,0.6)">⚠️ Firebase not configured — local only</div>`;
+  const c={on:'#10B981',sync:'#F59E0B',off:'#EF4444'},l={on:'Synced ✓',sync:'Syncing...',off:'Offline'};
+  return`<div class="sb"><div class="sd ${ss}"></div>${l[ss]}${tripCode?` <span style="margin-left:8px;color:#D4AF37;font-weight:600">${tripCode}</span><button onclick="toast('Share code: ${tripCode} — Give to your wife!')" style="margin-left:6px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:11px;cursor:pointer;text-decoration:underline">Share</button><button onclick="resetTrip()" style="margin-left:6px;background:none;border:none;color:rgba(239,68,68,0.4);font-size:11px;cursor:pointer;text-decoration:underline">Leave</button>`:''}</div>`;
+}
+function rsb(){const e=document.querySelector('.sb');if(e){const t=document.createElement('div');t.innerHTML=rSB();e.replaceWith(t.firstElementChild)}}
+
+function resetTrip(){if(confirm('Leave this trip? You can rejoin with the code.')){unsubs.forEach(f=>f());unsubs=[];tripCode='';localStorage.removeItem('cm_tc');S.itin=defItin();S.docs=[];S.tix=[];render()}}
+
+function rNav(){
+  const ts=[{id:'dashboard',i:'🏠',l:'Home'},{id:'itinerary',i:'🗓️',l:'Itinerary'},{id:'documents',i:'📄',l:'Docs'},{id:'tickets',i:'✈️',l:'Tickets'},{id:'travelers',i:'👥',l:'Travelers'}];
+  return`<div class="bnav">${ts.map(t=>`<button class="nb ${S.tab===t.id?'on':''}" onclick="nav('${t.id}')"><span class="ic">${t.i}</span><span class="lb">${t.l}</span>${S.tab===t.id?'<div class="nd"></div>':''}</button>`).join('')}</div>`;
+}
+
+// ════════ Setup ════════
+function rSetup(){
+  return`<div class="setup"><div style="width:100%;max-width:400px;text-align:center">
+    <div style="font-size:60px;margin-bottom:16px">⛩️</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:28px;background:linear-gradient(135deg,#fff,#D4AF37);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Chiang Mai Trip</h1>
+    <p style="color:rgba(255,255,255,0.4);font-size:13px;margin:8px 0 32px">Sync between your phones</p>
+    <div class="g" style="padding:24px;text-align:left">
+      <div style="font-size:13px;font-weight:600;color:#D4AF37;margin-bottom:8px">🆕 Create New Trip</div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:16px">Get a 6-letter code to share with your wife</p>
+      <button class="bg-gold" style="width:100%" onclick="createTrip()">Create Trip</button>
+    </div>
+    <div class="ordiv">OR</div>
+    <div class="g" style="padding:24px;text-align:left">
+      <div style="font-size:13px;font-weight:600;color:#A78BFA;margin-bottom:8px">🔗 Join Trip</div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:16px">Enter the code your partner shared</p>
+      <input id="jc" class="inp ci" placeholder="ABC123" maxlength="6" oninput="this.value=this.value.toUpperCase()" style="margin-bottom:12px"/>
+      <button class="bg-purple" style="width:100%" onclick="joinTrip()">Join Trip</button>
+    </div>
+  </div></div>`;
+}
+
+async function createTrip(){tripCode=genCode();localStorage.setItem('cm_tc',tripCode);await pushInit();listen();render();toast('Trip created! Code: '+tripCode)}
+async function joinTrip(){
+  const c=document.getElementById('jc')?.value?.trim().toUpperCase();
+  if(!c||c.length!==6){toast('Enter 6-char code','err');return}
+  const d=await db.collection('trips').doc(c).get();
+  if(!d.exists){toast('Trip not found!','err');return}
+  tripCode=c;localStorage.setItem('cm_tc',c);listen();render();toast('Joined! 🎉')
+}
+
+// ════════ Dashboard ════════
+function rDash(){
+  const tot=S.itin.reduce((a,d)=>a+d.spots.length,0),dn=S.itin.reduce((a,d)=>a+d.spots.filter(s=>s.done).length,0);
+  const pct=tot?Math.round(dn/tot*100):0,C=2*Math.PI*54,off=C-(pct/100)*C;
+  const td=S.itin.find(d=>d.spots.some(s=>!s.done))||S.itin[0];
+  const nx=td?td.spots.filter(s=>!s.done).slice(0,3):[];
+  let cw='';
+  if(!ok())cw=`<div class="cb"><h3>⚙️ Firebase Setup Needed</h3><p>To sync between phones:<br>1. Go to <code>console.firebase.google.com</code><br>2. Create project (free) → Add Web App<br>3. Enable: Auth (Anonymous), Firestore, Storage<br>4. Copy config into this file's <code>FB</code> object<br>5. Redeploy. Done!</p></div>`;
+
+  return`<div class="pg">
     <div style="padding:20px 0 10px;text-align:center">
       <div style="font-size:13px;letter-spacing:3px;color:#D4AF37;font-family:'Cormorant Garamond',serif;text-transform:uppercase;margin-bottom:4px">✦ Your Journey Awaits ✦</div>
-      <h1 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;background:linear-gradient(135deg,#FFFFFF 0%,#D4AF37 50%,#F5E6A3 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:4px 0">Chiang Mai</h1>
-      <p style="color:rgba(255,255,255,0.5);font-size:13px">🇹🇭 Northern Thailand · Rose of the North</p>
-    </div>
-    <div class="glass" style="padding:28px;margin:16px 0;text-align:center">
+      <h1 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;background:linear-gradient(135deg,#FFFFFF,#D4AF37,#F5E6A3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:4px 0">Chiang Mai</h1>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px">🇹🇭 Northern Thailand</p>
+    </div>${cw}
+    <div class="g" style="padding:28px;margin:16px 0;text-align:center">
       <div style="position:relative;width:130px;height:130px;margin:0 auto 16px">
-        <svg width="130" height="130" style="transform:rotate(-90deg)">
-          <circle cx="65" cy="65" r="54" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
-          <circle cx="65" cy="65" r="54" fill="none" stroke="#D4AF37" stroke-width="8" stroke-dasharray="${C}" stroke-dashoffset="${offset}" stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/>
-        </svg>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#D4AF37">${pct}%</span>
-          <span style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px">COMPLETE</span>
-        </div>
+        <svg width="130" height="130" style="transform:rotate(-90deg)"><circle cx="65" cy="65" r="54" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/><circle cx="65" cy="65" r="54" fill="none" stroke="#D4AF37" stroke-width="8" stroke-dasharray="${C}" stroke-dashoffset="${off}" stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/></svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#D4AF37">${pct}%</span><span style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px">COMPLETE</span></div>
       </div>
-      <div style="display:flex;justify-content:center;gap:32px">
-        ${[{n:done,l:'Visited'},{n:total-done,l:'Remaining'},{n:STATE.itinerary.length,l:'Days'}].map(s => `
-          <div style="text-align:center">
-            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff">${s.n}</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-top:2px">${s.l}</div>
-          </div>`).join('')}
-      </div>
+      <div style="display:flex;justify-content:center;gap:32px">${[{n:dn,l:'Visited'},{n:tot-dn,l:'Remaining'},{n:S.itin.length,l:'Days'}].map(s=>`<div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff">${s.n}</div><div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-top:2px">${s.l}</div></div>`).join('')}</div>
     </div>
-    <div class="quick-grid" style="margin:16px 0">
-      ${[
-        { icon:'📄', label:'Documents', count:STATE.documents.length, tab:'documents', color:'#5B8DEF' },
-        { icon:'🎫', label:'Tickets', count:STATE.tickets.length, tab:'tickets', color:'#A78BFA' },
-        { icon:'⛩️', label:'Places', count:total, tab:'itinerary', color:'#EF4444' },
-        { icon:'👥', label:'Travelers', count:2, tab:'travelers', color:'#10B981' },
-      ].map(item => `
-        <div class="glass" style="padding:18px;cursor:pointer" onclick="navigate('${item.tab}')">
-          <div style="font-size:28px;margin-bottom:8px">${item.icon}</div>
-          <div style="font-size:14px;font-weight:600;color:#fff">${item.label}</div>
-          <div style="font-size:12px;color:${item.color};margin-top:4px;font-weight:600">${item.count} items</div>
-        </div>`).join('')}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">${[{i:'📄',l:'Documents',c:S.docs.length,t:'documents',cl:'#5B8DEF'},{i:'🎫',l:'Tickets',c:S.tix.length,t:'tickets',cl:'#A78BFA'},{i:'⛩️',l:'Places',c:tot,t:'itinerary',cl:'#EF4444'},{i:'👥',l:'Travelers',c:2,t:'travelers',cl:'#10B981'}].map(x=>`<div class="g" style="padding:18px;cursor:pointer" onclick="nav('${x.t}')"><div style="font-size:28px;margin-bottom:8px">${x.i}</div><div style="font-size:14px;font-weight:600;color:#fff">${x.l}</div><div style="font-size:12px;color:${x.cl};margin-top:4px;font-weight:600">${x.c} items</div></div>`).join('')}</div>
+    ${td?`<h3 style="font-family:'Playfair Display',serif;font-size:18px;color:#D4AF37;margin:24px 0 12px">Up Next — ${td.day}</h3>${nx.map(s=>`<div class="g" style="padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px"><div style="width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:${TC[s.type]}20">${TI[s.type]}</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div><div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px">${s.time}</div></div><span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;color:${TC[s.type]};background:${TC[s.type]}15">${s.type}</span></div>`).join('')}`:''}
+    <div class="g" style="padding:16px;margin:20px 0;border-color:rgba(239,68,68,0.2)">
+      <div style="font-size:13px;font-weight:600;color:#EF4444;margin-bottom:8px">🆘 Emergency</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.8">Tourist Police: <b style="color:#fff">1155</b> · Ambulance: <b style="color:#fff">1669</b> · Indian Embassy: <b style="color:#fff">+66 2 258 0300</b></div>
+    </div></div>`;
+}
+
+// ════════ Itinerary ════════
+function rItin(){
+  return`<div class="pg"><div style="padding:20px 0 16px"><h2 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff">Your Itinerary</h2><p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:4px">Tap to mark visited ✓</p></div>
+  ${S.itin.map(d=>{
+    const dc=d.spots.filter(s=>s.done).length,io=S.ui.ed===d.id,ad=dc===d.spots.length;
+    return`<div style="margin-bottom:12px"><div class="g ${io?'g-a':''}" style="padding:16px;cursor:pointer" onclick="S.ui.ed=S.ui.ed===${d.id}?null:${d.id};render()">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#D4AF37">${d.day}</div><div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px">${d.date}</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;background:${ad?'rgba(16,185,129,0.15)':'rgba(212,175,55,0.1)'};color:${ad?'#10B981':'#D4AF37'}">${dc}/${d.spots.length}</span><span style="color:rgba(255,255,255,0.3);font-size:14px;display:inline-block;transform:rotate(${io?180:0}deg);transition:transform 0.3s">▼</span></div></div></div>
+    ${io?`<div class="tl">${d.spots.map((s,i)=>`<div style="position:relative;padding-left:20px;margin-bottom:4px;animation:fadeUp 0.3s ease ${i*0.05}s both">
+      <div class="td" style="background:${s.done?'#10B981':TC[s.type]}">${s.done?'✓':''}</div>
+      <div class="g spot-card ${s.done?'done':''}" style="padding:14px 16px;margin-bottom:8px;${s.done?'opacity:0.45':''}">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div onclick="togSpot(${d.id},${s.id})" style="cursor:pointer;margin-top:2px;width:22px;height:22px;border-radius:6px;border:2px solid ${s.done?'#10B981':'rgba(255,255,255,0.2)'};background:${s.done?'#10B981':'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s"><span style="font-size:12px;color:#fff">${s.done?'✓':''}</span></div>
+          <div style="flex:1;min-width:0;cursor:pointer" onclick="openPlace('${s.name.replace(/'/g,"\\'")}')">
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">${TI[s.type]}</span><span style="font-size:14px;font-weight:600;color:#fff;${s.done?'text-decoration:line-through':''}">${s.name}</span><span style="font-size:12px;opacity:0.4">↗</span></div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;padding-left:24px">🕐 ${s.time}</div>
+            ${s.notes?`<div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;padding-left:24px;font-style:italic">💡 ${s.notes}</div>`:''}
+          </div>
+          <button class="rbtn" style="width:28px;height:28px;flex-shrink:0" onclick="event.stopPropagation();rmSpot(${d.id},${s.id})">×</button>
+        </div></div></div>`).join('')}
+      ${S.ui.add===d.id?`<div style="padding-left:20px;margin-bottom:12px"><div class="g" style="padding:16px">
+        <input id="sn" class="inp" placeholder="Spot name..."/>
+        <div style="display:flex;gap:8px;margin-top:8px"><input id="st" class="inp" style="flex:1" placeholder="Time..."/><select id="sy" class="inp" style="flex:1">${Object.entries(TI).map(([k,v])=>`<option value="${k}">${v} ${k}</option>`).join('')}</select></div>
+        <input id="so" class="inp" style="margin-top:8px" placeholder="Notes..."/>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="bg-gold" onclick="addSpot(${d.id})">Add</button><button class="bg-ghost" onclick="S.ui.add=null;render()">Cancel</button></div></div></div>`
+      :`<div style="padding-left:20px;margin-bottom:12px"><button class="bg-ghost" style="width:100%;padding:10px;font-size:13px" onclick="S.ui.add=${d.id};render()">+ Add spot</button></div>`}
+    </div>`:''}
+    </div>`}).join('')}</div>`;
+}
+
+async function togSpot(di,si){const d=S.itin.find(x=>x.id===di);if(d){const s=d.spots.find(x=>x.id===si);if(s)s.done=!s.done}await cloudSave('itinerary',di,{day:d.day,date:d.date,spots:d.spots});render()}
+
+function openPlace(name){window.open('https://www.google.com/maps/search/'+encodeURIComponent(name+' Chiang Mai'),'_blank')}
+async function rmSpot(di,si){const d=S.itin.find(x=>x.id===di);if(d)d.spots=d.spots.filter(x=>x.id!==si);await cloudSave('itinerary',di,{day:d.day,date:d.date,spots:d.spots});render()}
+async function addSpot(di){
+  const n=document.getElementById('sn')?.value;if(!n?.trim())return;
+  const d=S.itin.find(x=>x.id===di);
+  if(d)d.spots.push({id:Date.now(),name:n,done:false,time:document.getElementById('st')?.value||'',type:document.getElementById('sy')?.value||'attraction',notes:document.getElementById('so')?.value||''});
+  S.ui.add=null;await cloudSave('itinerary',di,{day:d.day,date:d.date,spots:d.spots});render()
+}
+
+// ════════ Documents ════════
+function rDocs(){
+  return`<div class="pg"><div style="padding:20px 0 16px"><h2 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff">Document Vault</h2><p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:4px">Synced to all devices</p></div>
+  <div class="g" style="padding:20px;margin-bottom:16px">
+    <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:12px;font-weight:600">Upload Document</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">${DT.map(d=>`<button class="tag ${sdt===d.id?'tg':''}" onclick="sdt='${d.id}';render()">${d.i} ${d.l}</button>`).join('')}</div>
+    <input type="file" id="dfi" accept="image/*,.pdf" style="display:none" onchange="upDoc(this)"/>
+    <button class="bg-gold" style="width:100%" onclick="document.getElementById('dfi').click()">📤 Upload ${DT.find(d=>d.id===sdt)?.l}</button>
+    <div id="dus"></div>
+  </div>
+  ${S.docs.length===0?`<div class="g" style="padding:40px 20px;text-align:center"><div style="font-size:48px;margin-bottom:12px">🔐</div><div style="color:rgba(255,255,255,0.4);font-size:14px">No documents yet</div></div>`:
+  S.docs.map(d=>{const dt=DT.find(x=>x.id===d.type)||DT[4];return`<div class="g" style="padding:16px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(212,175,55,0.1)">${dt.i}</div>
+      <div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff">${dt.l}</div><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.fileName||''} · ${d.fileSize||''}</div></div>
+      <button class="rbtn" onclick="rmDoc('${d.id}')">×</button>
     </div>
-    ${todayDay ? `
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:#D4AF37;margin:24px 0 12px;display:flex;align-items:center;gap:8px">
-        <span class="section-line"></span> Up Next — ${todayDay.day}
-      </h3>
-      ${nextSpots.map(spot => `
-        <div class="glass" style="padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px">
-          <div class="icon-box" style="background:${TYPE_COLORS[spot.type]}20">${TYPE_ICONS[spot.type]}</div>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${spot.name}</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px">${spot.time}</div>
-          </div>
-          <span class="type-badge" style="color:${TYPE_COLORS[spot.type]};background:${TYPE_COLORS[spot.type]}15">${spot.type}</span>
-        </div>`).join('')}
-    ` : ''}
-    <div class="glass" style="padding:16px;margin:20px 0;border-color:rgba(239,68,68,0.2)">
-      <div style="font-size:13px;font-weight:600;color:#EF4444;margin-bottom:8px">🆘 Emergency Info</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.8">
-        Tourist Police: <span style="color:#fff">1155</span> · Ambulance: <span style="color:#fff">1669</span> · Indian Embassy: <span style="color:#fff">+66 2 258 0300</span>
-      </div>
+    <div style="margin-top:10px;display:flex;gap:8px">
+      <button class="bg-ghost" style="flex:1;padding:8px;font-size:12px" onclick="openV('${(d.downloadURL||'').replace(/'/g,"\\'")}','${(dt.l||'').replace(/'/g,"\\'")}','${d.fileType||''}')">👁 View</button>
+      <a href="${d.downloadURL||'#'}" target="_blank" class="bg-ghost" style="flex:1;padding:8px;font-size:12px;text-decoration:none;text-align:center">⬇️ Download</a>
+    </div></div>`}).join('')}</div>`;
+}
+
+async function upDoc(inp){
+  const f=inp.files[0];if(!f)return;
+  const el=document.getElementById('dus');
+  el.innerHTML=`<div class="us upl"><div class="sp"></div> Uploading ${f.name}...</div>`;
+  try{
+    const id=Date.now();let url='';
+    if(fbOk&&tripCode)url=await cloudUpload(`docs/${id}_${f.name}`,f);
+    else url=URL.createObjectURL(f);
+    const m={id:String(id),type:sdt,fileName:f.name,fileType:f.type,fileSize:fmt(f.size),uploadedAt:new Date().toLocaleDateString(),downloadURL:url,storagePath:`docs/${id}_${f.name}`};
+    S.docs.push(m);await cloudSave('documents',id,m);
+    el.innerHTML=`<div class="us ok">✅ Uploaded & synced!</div>`;toast('Document uploaded! 📄');setTimeout(()=>render(),800);
+  }catch(e){el.innerHTML=`<div class="us fail">❌ ${e.message}</div>`;toast('Failed','err')}
+  inp.value='';
+}
+
+async function rmDoc(id){
+  const d=S.docs.find(x=>String(x.id)===String(id));
+  if(d?.storagePath)await cloudDelFile(d.storagePath);
+  await cloudDel('documents',id);
+  S.docs=S.docs.filter(x=>String(x.id)!==String(id));render();toast('Removed');
+}
+
+// ════════ Tickets ════════
+function rTix(){
+  return`<div class="pg"><div style="padding:20px 0 16px"><h2 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff">Tickets & Bookings</h2><p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:4px">Synced across devices</p></div>
+  <div class="g" style="padding:20px;margin-bottom:16px">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">${TT.map(t=>`<button class="tag ${stt===t.id?'tp':''}" onclick="stt='${t.id}';render()">${t.i} ${t.l}</button>`).join('')}</div>
+    <input id="tl" class="inp" style="margin-bottom:10px" placeholder="Label (e.g. DEL → CNX)"/>
+    <input type="file" id="tfi" accept="image/*,.pdf" style="display:none" onchange="upTix(this)"/>
+    <button class="bg-purple" style="width:100%" onclick="document.getElementById('tfi').click()">📤 Upload Ticket</button>
+    <div id="tus"></div>
+  </div>
+  ${S.tix.length===0?`<div class="g" style="padding:40px 20px;text-align:center"><div style="font-size:48px;margin-bottom:12px">🎫</div><div style="color:rgba(255,255,255,0.4);font-size:14px">No tickets yet</div></div>`:
+  S.tix.map(t=>{const tt=TT.find(x=>x.id===t.type)||TT[0];return`<div class="g" style="padding:16px;margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(167,139,250,0.1)">${tt.i}</div>
+      <div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#fff">${t.label||t.fileName}</div><div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px">${tt.l} · ${t.fileSize||''}</div></div>
+      <button class="rbtn" onclick="rmTix('${t.id}')">×</button>
     </div>
-  </div>`;
+    <div style="margin-top:10px;display:flex;gap:8px">
+      <button class="bg-ghost" style="flex:1;padding:8px;font-size:12px" onclick="openV('${(t.downloadURL||'').replace(/'/g,"\\'")}','${(t.label||'Ticket').replace(/'/g,"\\'")}','${t.fileType||''}')">👁 View</button>
+      <a href="${t.downloadURL||'#'}" target="_blank" class="bg-ghost" style="flex:1;padding:8px;font-size:12px;text-decoration:none;text-align:center">⬇️ Download</a>
+    </div></div>`}).join('')}</div>`;
 }
 
-// ─── Itinerary ───
-function renderItinerary() {
-  return `<div class="page">
-    <div class="page-header"><h2 class="page-title">Your Itinerary</h2><p class="page-subtitle">Tap spots to mark as visited ✓</p></div>
-    ${STATE.itinerary.map(day => {
-      const doneCount = day.spots.filter(s=>s.done).length;
-      const isOpen = STATE.ui.expandedDay === day.id;
-      const allDone = doneCount === day.spots.length;
-      return `<div style="margin-bottom:12px">
-          <div class="glass ${isOpen?'glass-active':''}" style="padding:16px;cursor:pointer" onclick="toggleDay(${day.id})">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#D4AF37">${day.day}</div>
-                <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px">${day.date}</div>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px">
-                <span style="font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;background:${allDone?'rgba(16,185,129,0.15)':'rgba(212,175,55,0.1)'};color:${allDone?'#10B981':'#D4AF37'}">${doneCount}/${day.spots.length}</span>
-                <span style="color:rgba(255,255,255,0.3);font-size:14px;display:inline-block;transform:rotate(${isOpen?180:0}deg);transition:transform 0.3s">▼</span>
-              </div>
-            </div>
-          </div>
-          ${isOpen ? `<div class="timeline">
-              ${day.spots.map((spot, i) => `
-                <div style="position:relative;padding-left:20px;margin-bottom:4px;animation:fadeUp 0.3s ease ${i*0.05}s both">
-                  <div class="timeline-dot" style="background:${spot.done?'#10B981':TYPE_COLORS[spot.type]}">${spot.done?'✓':''}</div>
-                  <div class="glass spot-card ${spot.done?'done':''}" style="padding:14px 16px;margin-bottom:8px" onclick="toggleSpot(${day.id},${spot.id})">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                      <div style="flex:1">
-                        <div style="display:flex;align-items:center;gap:8px">
-                          <span style="font-size:16px">${TYPE_ICONS[spot.type]}</span>
-                          <span style="font-size:14px;font-weight:600;color:#fff;${spot.done?'text-decoration:line-through':''}">${spot.name}</span>
-                        </div>
-                        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;padding-left:24px">🕐 ${spot.time}</div>
-                        ${spot.notes?`<div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;padding-left:24px;font-style:italic">💡 ${spot.notes}</div>`:''}
-                      </div>
-                      <button class="remove-btn" onclick="event.stopPropagation();removeSpot(${day.id},${spot.id})">×</button>
-                    </div>
-                  </div>
-                </div>`).join('')}
-              ${STATE.ui.addingTo === day.id ? `
-                <div style="padding-left:20px;margin-bottom:12px">
-                  <div class="glass" style="padding:16px">
-                    <input id="newSpotName" class="input" placeholder="Spot name..." />
-                    <div style="display:flex;gap:8px;margin-top:8px">
-                      <input id="newSpotTime" class="input" style="flex:1" placeholder="Time..." />
-                      <select id="newSpotType" class="input" style="flex:1">
-                        ${Object.entries(TYPE_ICONS).map(([k,v]) => `<option value="${k}">${v} ${k}</option>`).join('')}
-                      </select>
-                    </div>
-                    <input id="newSpotNotes" class="input" style="margin-top:8px" placeholder="Notes (optional)..." />
-                    <div style="display:flex;gap:8px;margin-top:12px">
-                      <button class="btn-gold" onclick="addSpot(${day.id})">Add Spot</button>
-                      <button class="btn-ghost" onclick="STATE.ui.addingTo=null;render()">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              ` : `
-                <div style="padding-left:20px;margin-bottom:12px">
-                  <button class="btn-ghost" style="width:100%;padding:10px;font-size:13px" onclick="STATE.ui.addingTo=${day.id};render()">+ Add a spot</button>
-                </div>`}
-            </div>` : ''}
-        </div>`;
-    }).join('')}
-  </div>`;
+async function upTix(inp){
+  const f=inp.files[0];if(!f)return;
+  const el=document.getElementById('tus');
+  el.innerHTML=`<div class="us upl"><div class="sp"></div> Uploading...</div>`;
+  try{
+    const id=Date.now(),lb=document.getElementById('tl')?.value||f.name;let url='';
+    if(fbOk&&tripCode)url=await cloudUpload(`tickets/${id}_${f.name}`,f);
+    else url=URL.createObjectURL(f);
+    const m={id:String(id),type:stt,label:lb,fileName:f.name,fileType:f.type,fileSize:fmt(f.size),uploadedAt:new Date().toLocaleDateString(),downloadURL:url,storagePath:`tickets/${id}_${f.name}`};
+    S.tix.push(m);await cloudSave('tickets',id,m);
+    el.innerHTML=`<div class="us ok">✅ Uploaded!</div>`;toast('Ticket uploaded! 🎫');setTimeout(()=>render(),800);
+  }catch(e){el.innerHTML=`<div class="us fail">❌ ${e.message}</div>`;toast('Failed','err')}
+  inp.value='';
 }
 
-function toggleDay(id) { STATE.ui.expandedDay = STATE.ui.expandedDay===id ? null : id; render(); }
-function toggleSpot(dayId, spotId) {
-  const day = STATE.itinerary.find(d=>d.id===dayId);
-  if(day) { const spot = day.spots.find(s=>s.id===spotId); if(spot) spot.done = !spot.done; }
-  saveState('cm_itin2', STATE.itinerary); render();
-}
-function removeSpot(dayId, spotId) {
-  const day = STATE.itinerary.find(d=>d.id===dayId);
-  if(day) day.spots = day.spots.filter(s=>s.id!==spotId);
-  saveState('cm_itin2', STATE.itinerary); render();
-}
-function addSpot(dayId) {
-  const name = document.getElementById('newSpotName')?.value;
-  if(!name?.trim()) return;
-  const day = STATE.itinerary.find(d=>d.id===dayId);
-  if(day) day.spots.push({
-    id: Date.now(), name, done: false,
-    time: document.getElementById('newSpotTime')?.value || '',
-    type: document.getElementById('newSpotType')?.value || 'attraction',
-    notes: document.getElementById('newSpotNotes')?.value || '',
-  });
-  STATE.ui.addingTo = null;
-  saveState('cm_itin2', STATE.itinerary); render();
+async function rmTix(id){
+  const t=S.tix.find(x=>String(x.id)===String(id));
+  if(t?.storagePath)await cloudDelFile(t.storagePath);
+  await cloudDel('tickets',id);
+  S.tix=S.tix.filter(x=>String(x.id)!==String(id));render();toast('Removed');
 }
 
-// ─── Documents ───
-const DOC_TYPES = [
-  { id:'passport', label:'Passport', icon:'🛂' },
-  { id:'aadhaar', label:'Aadhaar Card', icon:'🪪' },
-  { id:'visa', label:'Visa', icon:'📋' },
-  { id:'insurance', label:'Travel Insurance', icon:'🛡️' },
-  { id:'other', label:'Other ID', icon:'📄' },
-];
-let selectedDocType = 'passport';
-
-function renderDocuments() {
-  return `<div class="page">
-    <div class="page-header"><h2 class="page-title">Document Vault</h2><p class="page-subtitle">Upload passport, Aadhaar, visa & more</p></div>
-    <div class="glass" style="padding:20px;margin-bottom:16px">
-      <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:12px;font-weight:600">Upload Document</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-        ${DOC_TYPES.map(dt => `<button class="tag-btn ${selectedDocType===dt.id?'gold-active':''}" onclick="selectedDocType='${dt.id}';render()">${dt.icon} ${dt.label}</button>`).join('')}
-      </div>
-      <input type="file" id="docFileInput" accept="image/*,.pdf,application/pdf" style="display:none" onchange="handleDocUpload(this)" />
-      <button class="btn-gold" style="width:100%" onclick="document.getElementById('docFileInput').click()">
-        📤 Upload ${DOC_TYPES.find(d=>d.id===selectedDocType)?.label}
-      </button>
-      <div id="docUploadStatus"></div>
-    </div>
-    ${STATE.documents.length === 0 ? `
-      <div class="glass" style="padding:40px 20px;text-align:center">
-        <div style="font-size:48px;margin-bottom:12px">🔐</div>
-        <div style="color:rgba(255,255,255,0.4);font-size:14px">No documents yet. Upload your first one above!</div>
-        <div style="color:rgba(255,255,255,0.25);font-size:12px;margin-top:8px">Supports photos & PDFs up to 100MB+</div>
-      </div>
-    ` : STATE.documents.map(doc => {
-      const dt = DOC_TYPES.find(d=>d.id===doc.type) || DOC_TYPES[4];
-      return `
-        <div class="glass" style="padding:16px;margin-bottom:10px">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div class="icon-box icon-box-lg" style="background:rgba(212,175,55,0.1)">${dt.icon}</div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:14px;font-weight:600;color:#fff">${dt.label}</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-                ${doc.fileName} · ${doc.fileSize} · ${doc.uploadedAt}
-              </div>
-            </div>
-            <button class="view-btn" onclick="openViewer('doc_${doc.id}','${dt.label} - ${(doc.fileName||'').replace(/'/g,'')}')" title="View full screen">👁</button>
-            <button class="remove-btn-sm" onclick="removeDoc(${doc.id})" title="Delete">×</button>
-          </div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="btn-ghost" style="flex:1;padding:8px;font-size:12px" onclick="openViewer('doc_${doc.id}','${dt.label}')">👁 View Full Screen</button>
-            <button class="btn-ghost" style="flex:1;padding:8px;font-size:12px" onclick="downloadFile('doc_${doc.id}','${(doc.fileName||'document').replace(/'/g,'')}')">⬇️ Download</button>
-          </div>
-          <div id="thumb_doc_${doc.id}" style="margin-top:10px"></div>
-        </div>`;
-    }).join('')}
-  </div>`;
+// ════════ Travelers ════════
+function rTvl(){
+  return`<div class="pg"><div style="padding:20px 0 16px"><h2 style="font-family:'Playfair Display',serif;font-size:26px;color:#fff">Travelers</h2><p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:4px">Travel party details</p></div>
+  ${S.tvl.map(t=>`<div class="g" style="padding:20px;margin-bottom:12px">${S.ui.et===t.id?rTE(t):rTV(t)}</div>`).join('')}</div>`;
 }
 
-async function handleDocUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const statusEl = document.getElementById('docUploadStatus');
-  statusEl.innerHTML = `<div class="upload-status"><div class="spinner"></div> Uploading ${file.name}...</div>`;
-
-  try {
-    const id = Date.now();
-    const fileId = 'doc_' + id;
-
-    // Store the raw file blob in IndexedDB
-    await saveFile(fileId, file, { name: file.name, type: file.type, size: file.size });
-
-    // Store metadata in localStorage
-    STATE.documents.push({
-      id, type: selectedDocType, fileName: file.name,
-      fileType: file.type, fileSize: formatBytes(file.size),
-      uploadedAt: new Date().toLocaleDateString(),
-    });
-    saveState('cm_docs2', STATE.documents);
-
-    statusEl.innerHTML = `<div class="upload-status success">✅ ${file.name} uploaded successfully!</div>`;
-    showToast('Document uploaded! 📄');
-
-    setTimeout(() => { render(); }, 800);
-  } catch (err) {
-    statusEl.innerHTML = `<div class="upload-status error">❌ Upload failed: ${err.message}</div>`;
-    showToast('Upload failed', 'error');
-  }
-  input.value = '';
+function rTE(t){
+  const fs=[{k:'name',l:'Full Name'},{k:'relation',l:'Relation'},{k:'passport',l:'Passport No.'},{k:'aadhaar',l:'Aadhaar No.'},{k:'dob',l:'Date of Birth'},{k:'phone',l:'Phone'},{k:'email',l:'Email'},{k:'blood',l:'Blood Group'},{k:'allergies',l:'Allergies/Medical'},{k:'emergency',l:'Emergency Contact'}];
+  return`<div style="font-size:13px;color:#D4AF37;font-weight:600;margin-bottom:12px">✏️ Edit</div>
+  ${fs.map(f=>`<div style="margin-bottom:8px"><label style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:4px">${f.l}</label><input class="inp" id="f_${t.id}_${f.k}" value="${t[f.k]||''}"/></div>`).join('')}
+  <div style="display:flex;gap:8px;margin-top:14px"><button class="bg-gold" onclick="saveTvl(${t.id})">Save</button><button class="bg-ghost" onclick="S.ui.et=null;render()">Cancel</button></div>`;
 }
 
-async function removeDoc(id) {
-  await deleteFile('doc_' + id);
-  STATE.documents = STATE.documents.filter(d => d.id !== id);
-  saveState('cm_docs2', STATE.documents);
-  render();
-  showToast('Document removed');
+function rTV(t){
+  const gr=t.id===1?'linear-gradient(135deg,#5B8DEF,#A78BFA)':'linear-gradient(135deg,#F59E0B,#EF4444)';
+  const items=[{l:'Passport',v:t.passport,i:'🛂'},{l:'Aadhaar',v:t.aadhaar,i:'🪪'},{l:'DOB',v:t.dob,i:'🎂'},{l:'Blood',v:t.blood,i:'🩸'},{l:'Phone',v:t.phone,i:'📱'},{l:'Email',v:t.email,i:'📧'}].filter(x=>x.v);
+  return`<div style="display:flex;justify-content:space-between;align-items:flex-start">
+    <div style="display:flex;align-items:center;gap:12px"><div style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;background:${gr}">${(t.name||'?')[0]}</div>
+    <div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff">${t.name||'Tap edit'}</div><div style="font-size:12px;color:#D4AF37;margin-top:2px">${t.relation||''}</div></div></div>
+    <button class="bg-ghost" style="padding:6px 14px;font-size:12px" onclick="S.ui.et=${t.id};render()">✏️</button></div>
+  ${items.length?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">${items.map(i=>`<div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:10px 12px"><div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-bottom:3px">${i.i} ${i.l}</div><div style="font-size:13px;color:#fff;font-weight:500">${i.v}</div></div>`).join('')}</div>`:''}
+  ${t.allergies?`<div style="margin-top:10px;background:rgba(239,68,68,0.08);border-radius:10px;padding:10px 12px"><div style="font-size:10px;color:rgba(239,68,68,0.6);margin-bottom:3px">⚠️ MEDICAL</div><div style="font-size:13px;color:#EF4444">${t.allergies}</div></div>`:''}
+  ${t.emergency?`<div style="margin-top:10px;background:rgba(16,185,129,0.08);border-radius:10px;padding:10px 12px"><div style="font-size:10px;color:rgba(16,185,129,0.6);margin-bottom:3px">🆘 EMERGENCY</div><div style="font-size:13px;color:#10B981">${t.emergency}</div></div>`:''}`;
 }
 
-// ─── Tickets ───
-const TICKET_TYPES = [
-  { id:'flight', label:'Flight Ticket', icon:'✈️' },
-  { id:'hotel', label:'Hotel Booking', icon:'🏨' },
-  { id:'activity', label:'Activity/Tour', icon:'🎫' },
-  { id:'transport', label:'Transport', icon:'🚌' },
-];
-let selectedTicketType = 'flight';
-
-function renderTickets() {
-  return `<div class="page">
-    <div class="page-header"><h2 class="page-title">Tickets & Bookings</h2><p class="page-subtitle">All your confirmations in one place</p></div>
-    <div class="glass" style="padding:20px;margin-bottom:16px">
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-        ${TICKET_TYPES.map(tt => `<button class="tag-btn ${selectedTicketType===tt.id?'purple-active':''}" onclick="selectedTicketType='${tt.id}';render()">${tt.icon} ${tt.label}</button>`).join('')}
-      </div>
-      <input id="ticketLabel" class="input" style="margin-bottom:10px" placeholder="Label (e.g. DEL → CNX Flight)" />
-      <input type="file" id="ticketFileInput" accept="image/*,.pdf,application/pdf" style="display:none" onchange="handleTicketUpload(this)" />
-      <button class="btn-purple" style="width:100%" onclick="document.getElementById('ticketFileInput').click()">📤 Upload Ticket</button>
-      <div id="ticketUploadStatus"></div>
-    </div>
-    ${STATE.tickets.length === 0 ? `
-      <div class="glass" style="padding:40px 20px;text-align:center">
-        <div style="font-size:48px;margin-bottom:12px">🎫</div>
-        <div style="color:rgba(255,255,255,0.4);font-size:14px">No tickets yet. Upload your bookings above!</div>
-      </div>
-    ` : STATE.tickets.map(t => {
-      const tt = TICKET_TYPES.find(x=>x.id===t.type) || TICKET_TYPES[0];
-      return `
-        <div class="glass" style="padding:16px;margin-bottom:10px">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div class="icon-box icon-box-lg" style="background:rgba(167,139,250,0.1)">${tt.icon}</div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:14px;font-weight:600;color:#fff">${t.label}</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px">${tt.label} · ${t.fileSize} · ${t.uploadedAt}</div>
-            </div>
-            <button class="view-btn" onclick="openViewer('ticket_${t.id}','${(t.label||'').replace(/'/g,'')}')" title="View">👁</button>
-            <button class="remove-btn-sm" onclick="removeTicket(${t.id})">×</button>
-          </div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="btn-ghost" style="flex:1;padding:8px;font-size:12px" onclick="openViewer('ticket_${t.id}','${(t.label||'Ticket').replace(/'/g,'')}')">👁 View Full Screen</button>
-            <button class="btn-ghost" style="flex:1;padding:8px;font-size:12px" onclick="downloadFile('ticket_${t.id}','${(t.fileName||'ticket').replace(/'/g,'')}')">⬇️ Download</button>
-          </div>
-        </div>`;
-    }).join('')}
-  </div>`;
+async function saveTvl(id){
+  const t=S.tvl.find(x=>x.id===id);if(!t)return;
+  ['name','relation','passport','aadhaar','dob','phone','email','blood','allergies','emergency'].forEach(k=>{const e=document.getElementById(`f_${id}_${k}`);if(e)t[k]=e.value});
+  S.ui.et=null;const d={...t};delete d._id;
+  await cloudSave('travelers',id,d);render();toast('Saved! ✅');
 }
 
-async function handleTicketUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-
-  const statusEl = document.getElementById('ticketUploadStatus');
-  statusEl.innerHTML = `<div class="upload-status"><div class="spinner"></div> Uploading ${file.name}...</div>`;
-
-  try {
-    const id = Date.now();
-    const label = document.getElementById('ticketLabel')?.value || file.name;
-
-    await saveFile('ticket_' + id, file, { name: file.name, type: file.type, size: file.size });
-
-    STATE.tickets.push({
-      id, type: selectedTicketType, label, fileName: file.name,
-      fileType: file.type, fileSize: formatBytes(file.size),
-      uploadedAt: new Date().toLocaleDateString(),
-    });
-    saveState('cm_tickets2', STATE.tickets);
-
-    statusEl.innerHTML = `<div class="upload-status success">✅ ${file.name} uploaded successfully!</div>`;
-    showToast('Ticket uploaded! 🎫');
-    setTimeout(() => { render(); }, 800);
-  } catch (err) {
-    statusEl.innerHTML = `<div class="upload-status error">❌ Upload failed: ${err.message}</div>`;
-    showToast('Upload failed', 'error');
-  }
-  input.value = '';
-}
-
-async function removeTicket(id) {
-  await deleteFile('ticket_' + id);
-  STATE.tickets = STATE.tickets.filter(t => t.id !== id);
-  saveState('cm_tickets2', STATE.tickets);
-  render();
-  showToast('Ticket removed');
-}
-
-// ─── Travelers ───
-function renderTravelers() {
-  return `<div class="page">
-    <div class="page-header"><h2 class="page-title">Travelers</h2><p class="page-subtitle">Your travel party details</p></div>
-    ${STATE.travelers.map(t => `
-      <div class="glass" style="padding:20px;margin-bottom:12px">
-        ${STATE.ui.editingTraveler===t.id ? renderTravelerEdit(t) : renderTravelerView(t)}
-      </div>`).join('')}
-  </div>`;
-}
-
-function renderTravelerEdit(t) {
-  const fields = [
-    {k:'name',l:'Full Name',p:'Full name as on passport'},{k:'relation',l:'Relation',p:'e.g. Self, Wife'},
-    {k:'passport',l:'Passport No.',p:'Passport number'},{k:'aadhaar',l:'Aadhaar No.',p:'Aadhaar number'},
-    {k:'dob',l:'Date of Birth',p:'DD/MM/YYYY'},{k:'phone',l:'Phone',p:'Phone number'},
-    {k:'email',l:'Email',p:'Email address'},{k:'blood',l:'Blood Group',p:'e.g. O+, A-, B+'},
-    {k:'allergies',l:'Allergies/Medical',p:'Any allergies or conditions'},{k:'emergency',l:'Emergency Contact',p:'Name & phone'},
-  ];
-  return `<div style="font-size:13px;color:#D4AF37;font-weight:600;margin-bottom:12px">✏️ Edit Details</div>
-    ${fields.map(f => `<div style="margin-bottom:8px">
-        <label style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;display:block;margin-bottom:4px">${f.l}</label>
-        <input class="input" id="tf_${t.id}_${f.k}" value="${t[f.k]||''}" placeholder="${f.p}" />
-      </div>`).join('')}
-    <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="btn-gold" onclick="saveTraveler(${t.id})">Save</button>
-      <button class="btn-ghost" onclick="STATE.ui.editingTraveler=null;render()">Cancel</button>
-    </div>`;
-}
-
-function renderTravelerView(t) {
-  const grad = t.id===1 ? 'linear-gradient(135deg,#5B8DEF,#A78BFA)' : 'linear-gradient(135deg,#F59E0B,#EF4444)';
-  const items = [
-    {l:'Passport',v:t.passport,i:'🛂'},{l:'Aadhaar',v:t.aadhaar,i:'🪪'},
-    {l:'DOB',v:t.dob,i:'🎂'},{l:'Blood',v:t.blood,i:'🩸'},
-    {l:'Phone',v:t.phone,i:'📱'},{l:'Email',v:t.email,i:'📧'},
-  ].filter(x => x.v);
-  return `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="avatar" style="background:${grad}">${(t.name||'?')[0]}</div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff">${t.name||'Tap edit to add name'}</div>
-          <div style="font-size:12px;color:#D4AF37;margin-top:2px">${t.relation||'Relation'}</div>
-        </div>
-      </div>
-      <button class="btn-ghost" style="padding:6px 14px;font-size:12px" onclick="STATE.ui.editingTraveler=${t.id};render()">✏️ Edit</button>
-    </div>
-    ${items.length ? `<div class="info-grid" style="margin-top:16px">
-        ${items.map(item => `<div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:10px 12px">
-            <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-bottom:3px">${item.i} ${item.l}</div>
-            <div style="font-size:13px;color:#fff;font-weight:500">${item.v}</div>
-          </div>`).join('')}
-      </div>` : ''}
-    ${t.allergies ? `<div style="margin-top:10px;background:rgba(239,68,68,0.08);border-radius:10px;padding:10px 12px">
-        <div style="font-size:10px;color:rgba(239,68,68,0.6);letter-spacing:1px;margin-bottom:3px">⚠️ MEDICAL</div>
-        <div style="font-size:13px;color:#EF4444">${t.allergies}</div>
-      </div>` : ''}
-    ${t.emergency ? `<div style="margin-top:10px;background:rgba(16,185,129,0.08);border-radius:10px;padding:10px 12px">
-        <div style="font-size:10px;color:rgba(16,185,129,0.6);letter-spacing:1px;margin-bottom:3px">🆘 EMERGENCY CONTACT</div>
-        <div style="font-size:13px;color:#10B981">${t.emergency}</div>
-      </div>` : ''}`;
-}
-
-function saveTraveler(id) {
-  const t = STATE.travelers.find(x=>x.id===id);
-  if(!t) return;
-  ['name','relation','passport','aadhaar','dob','phone','email','blood','allergies','emergency'].forEach(k => {
-    const el = document.getElementById(`tf_${id}_${k}`);
-    if(el) t[k] = el.value;
-  });
-  STATE.ui.editingTraveler = null;
-  saveState('cm_travelers2', STATE.travelers);
-  render();
-  showToast('Details saved! ✅');
-}
-
-// ─── Service Worker ───
-if ('serviceWorker' in navigator) {
-  const SW = `const C='cm-v2';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['/']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{const cl=resp.clone();caches.open(C).then(c=>c.put(e.request,cl));return resp;}).catch(()=>caches.match('/')))));`;
-  const blob = new Blob([SW], { type: 'application/javascript' });
-  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
-}
-
-// ─── Init ───
-openDB().then(() => {
-  render();
-  console.log('✅ Chiang Mai Trip Companion loaded. IndexedDB ready for large files.');
-}).catch(err => {
-  console.error('DB Error:', err);
-  render(); // still render, just file storage won't work
-});
+// ════════ Init ════════
+(async()=>{const r=await initFB();if(r&&tripCode)listen();render()})();
 </script>
 </body>
 </html>
